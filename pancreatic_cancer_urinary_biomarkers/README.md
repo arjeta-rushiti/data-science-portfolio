@@ -10,9 +10,9 @@
 **Install dependencies using requirements.txt**
 
 **Full Python code is shown in pythonscript.ipynb**
+<hr>
 
 ### TABLE OF CONTENTS:
-<hr>
 
 * [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#description-of-the-relevance-of-the-topic)
 * [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#personal-interest-in-the-topic)
