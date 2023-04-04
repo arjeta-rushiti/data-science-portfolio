@@ -1,9 +1,9 @@
 # Predicting Pancreatic Cancer Using Urinary Biomarkers and an Ensemble of Machine Learning Algorithms
-<hr>
 
 **Core of the investigation:** detection of pancreatic cancer using urinary biomarkers and machine learning (ML) algorithms
 
 **Rough goals of the work:** building predictive models using a combination of ML algorithms with hyperparameter tuning for the diagnosis of pancreatic cancer using urinary biomarkers, with the aim of improving the diagnostic pathway for affected patients
+<hr>
 
 **NOTE:**
 
