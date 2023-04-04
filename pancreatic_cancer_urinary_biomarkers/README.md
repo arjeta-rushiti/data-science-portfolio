@@ -1,20 +1,27 @@
 # Predicting Pancreatic Cancer Using Urinary Biomarkers and an Ensemble of Machine Learning Algorithms
+<hr>
 
 **Core of the investigation:** detection of pancreatic cancer using urinary biomarkers and machine learning (ML) algorithms
 
 **Rough goals of the work:** building predictive models using a combination of ML algorithms with hyperparameter tuning for the diagnosis of pancreatic cancer using urinary biomarkers, with the aim of improving the diagnostic pathway for affected patients
 
+**NOTE:**
+
+**Install dependencies using requirements.txt**
+
+**Full Python code is shown in pythonscript.ipynb**
+
 ### TABLE OF CONTENTS:
 <hr>
 
-* [Description of the relevance of the topic]()
-* [Personal interest in the topic]()
-* [State of research]()
-* [Knowledge gap]()
-* [Objectives / Posing questions]()
-* [Methodology]()
-* [Results]()
-* [Outlook]()
+* [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#description-of-the-relevance-of-the-topic)
+* [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#personal-interest-in-the-topic)
+* [State of research](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#state-of-research)
+* [Knowledge gap](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#knowledge-gap)
+* [Objectives / Posing questions](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#objectives--posing-questions)
+* [Methodology](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#methodology)
+* [Results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#results)
+* [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers#outlook)
 
 
 ### Description of the relevance of the topic
@@ -35,7 +42,7 @@ stratification of patients into healthy individuals and those affected by PDAC.
 
 ### State of research
 
-In a recent paper, Debernardi et al.(2020, DOI:[https://doi.org/10.1371/journal.pmed.1003489)](https://doi.org/10.1371/journal.pmed.1003489)), described a promising predictor panel, namely, the PancRISK score for earlier detection of PDAC
+In a recent paper, Debernardi et al.(2020, DOI: [https://doi.org/10.1371/journal.pmed.1003489)](https://doi.org/10.1371/journal.pmed.1003489)), described a promising predictor panel, namely, the PancRISK score for earlier detection of PDAC
 in urine. 
 
 PancRISK is a model based on five predictors: a biomarker panel consisting of three proteins (LYVE1, REG1B, and TFF1), urine creatinine, and age, which is able to discriminate between healthy (control) and PDAC specimens, as well as between PDAC cancer patients and samples obtained from individuals with chronic pancreatitis and other benign hepatobiliary diseases, which
@@ -72,13 +79,7 @@ The overall methodology can be divided in five steps as follows:
 4. creating the ML model pipeline with hyperparameter tuning <p></p>
 
 5. building and evaluating an ensemble model <br>
-
-**NOTE:**
-
-**Install dependencies using requirements.txt**
-
-**Full Python code is shown in pythonscript.ipynb**
-    
+   
 ### Results
 
 The table below summarizes all computed results.
@@ -91,15 +92,9 @@ Judging the performance of the models based on the AUC scores which compares the
 
 However, to be able to draw more direct comparisons with the published results, the AUC score should be determined at different thresholds of sensitivity (SN) and specificity (SP). I note that Debernardi et al. report the AUC scores at a pre-selected cutoff of >80 % for the affiliated PancRISK score.
 
-![results.png](attachment:results.png)
+![Results](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/pancreatic_cancer_urinary_biomarkers/results.png)
 
 ### Outlook 
 
 Based on the computed accuracy and AUC scores, the ML models selected for investigation in this project (RF, SVC, and KNN) as well as their ensemble with max voting show a very promising performance in differentiating between healthy individuals and cancer patients with PDAC using the PancRISK predictor panel. Thus, it would be interesting to optimize and evaluate the models in differentiating between PDAC patients and those with other benign condition and similar clinical symptoms. Furthermore, the code could be adjusted to perform multi-class classification with three targets: healthy individuals, patients with benign condition, and sick patients with PDAC.
 For all these tasks, the AUC score could be determined at different thresholds of SP and SN to provide a more comprehensive understanding of the classifier’s performance. Finally, other ML algorithms suitable for classification problems (such as Naives Bayes, K-Means Clustering, Hierarchical Clustering, Multi Layer Perceptron etc.) could be investigated.
-
-
-
-```python
-
-```

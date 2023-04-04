@@ -1,20 +1,27 @@
 # Breast Cancer Multi-Class Classification with Keras
+<hr>
 
 **Core of the investigation:** machine learning study focused on cancer research
 
 **Rough goals of the work:** training a neural network for cancer classification using gene expression data
 
+**NOTE:**
+
+**Install dependencies using requirements.txt**
+
+**Full Python code is shown in pythonscript.ipynb**
+
 ### TABLE OF CONTENTS:
 <hr>
 
-* [Description of the relevance of the topic]()
-* [Personal interest in the topic]()
-* [State of research]()
-* [Knowledge gap]()
-* [Objectives / Posing questions]()
-* [Methodology]()
-* [Results]()
-* [Outlook]()
+* [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#description-of-the-relevance-of-the-topic)
+* [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#personal-interest-in-the-topic)
+* [State of research](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#state-of-research)
+* [Knowledge gap](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#knowledge-gap)
+* [Objectives / Posing questions](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#objectives--posing-questions)
+* [Methodology](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#methodology)
+* [Results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#results)
+* [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#outlook)
 
 
 ### Description of the relevance of the topic
@@ -81,12 +88,6 @@ The overall methodology can be divided in four steps as follows:
 3. building the NN model <p></p>
     
 4. evaluating the NN model <br>
-
-**NOTE:**
-
-**Install dependencies using requirements.txt**
-
-**Full Python code is shown in pythonscript.ipynb**
     
 ### Results
 
@@ -98,8 +99,3 @@ Even though the NN model built in this project performs much better than the ’
 To this regard, one can optimize the model by tuning the hyperparameters, such as the number of hidden layers, number of nodes in each hidden layer, the dropout rate, and so on. 
 Ideally, the dataset could also be improved to include more samples.
 These interventions might yield higher accuracy of the NN model which would allow for its usage in a real-world setting.
-
-
-```python
-
-```
