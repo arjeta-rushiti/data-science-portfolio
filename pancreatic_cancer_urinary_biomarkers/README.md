@@ -92,6 +92,7 @@ Judging the performance of the models based on the AUC scores which compares the
 
 However, to be able to draw more direct comparisons with the published results, the AUC score should be determined at different thresholds of sensitivity (SN) and specificity (SP). I note that Debernardi et al. report the AUC scores at a pre-selected cutoff of >80 % for the affiliated PancRISK score.
 
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/pancreatic_cancer_urinary_biomarkers/results.pngo" width="50%">
 ![Results](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/pancreatic_cancer_urinary_biomarkers/results.png)
 
 ### Outlook 
