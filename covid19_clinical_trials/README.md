@@ -3,17 +3,24 @@
 **Core of the investigation:** Data analysis and visualization
 
 **Rough goals of the work:** Dealing with clinical trials data in the healthcare system
-
-### TABLE OF CONTENTS:
 <hr>
 
-* [Description of the relevance of the topic]()
-* [Personal interest in the topic]()
-* [State of research]()
-* [Objectives / Posing questions]()
-* [Methodology]()
-* [Results]()
-* [Outlook]()
+**NOTE:**
+
+**Install dependencies using requirements.txt**
+
+**Full Python code is shown in pythonscript.ipynb**
+<hr>
+
+### TABLE OF CONTENTS:
+
+* [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#description-of-the-relevance-of-the-topic)
+* [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#personal-interest-in-the-topic)
+* [State of research](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#state-of-research)
+* [Objectives / Posing questions](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#objectives--posing-questions)
+* [Methodology](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#methodology)
+* [Results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#results)
+* [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials#outlook)
 
 
 ### Description of the relevance of the topic
@@ -68,15 +75,8 @@ The overall methodology can be divided in five steps as follows:
 4. handle missing values and clean the data <p></p>
 
 5. plot data <br>
-
-**NOTE:**
-
-**Install dependencies using requirements.txt**
-
-**Full Python code is shown in pythonscript.ipynb**
     
 ### Results
-<hr>
 
 This section is divided in terms of the question which were posed.
 
@@ -84,29 +84,29 @@ This section is divided in terms of the question which were posed.
 
 The clinical trials have been grouped based on the year they started. From this plot it is clear that the majority of trials (over 4000) started in 2020 with the outburst of the COVID-19 pandemic. Prior to this year there have been ongoing clical trials, but the number is very small compare to year 2020. A significant drop is observed in 2021, where the number of clinical trials is slightly over 1000.
 
-![start_date_year.png](attachment:start_date_year.png)
+![Start Date Year](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/start_date_year.png)
 
 Zooming in around year 2020, and exploring the beginning of the trials on monthly basis one can identify May 2020 as the month where the majority of clinical trials were registered.
 
-![start_date_month.png](attachment:start_date_month.png)
+![Start Date Month](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/start_date_month.png)
 
 **QUESTION 2: Which are the top 10 locations where the clinical trials were conducted?**
 
 The top 10 countries where the clinical trials were conducted over years are presented below and the order is as follows: United States, France, Unknown location, United Kingdom, Italy, Spain, Turkey, Canada, Egypt, and China.
 
-![top_countries.png](attachment:top_countries.png)
+![Top Locations](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/top_countries.png)
 
 **QUESTION 3: What type of studies were mostly conducted?**
 
 The next figure displays the nature of the clinical studies and the count number for each category. There are three main categories: interventional, observational, and expanded access, of which the first two dominate.
 
-![study_types.png](attachment:study_types.png)
+![Study Types](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/study_types.png)
 
 **QUESTION 4: Were the studies gender specific or did they include all genders?**
 
 To investigate the gender based study types I focused on the dominant clinical trials: interventional and observational. The results categorized based on the gender are presented below and show that the majority of the studies of either type included all genders. However, there are more studies conducted for females than for males, and only very small number or studies did not record or specify the gender.
 
-![study_gender_based.png](attachment:study_gender_based.png)
+![Genders](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/study_gender_based.png)
 
 **QUESTION 5: Did the studies consider specific age categories?**
 
@@ -122,7 +122,7 @@ In total, there are six age groups:
 
 Most of the clinical trials have been conducted for adults and older aldults, followed by studies which also includ children. The studies which considered only children, adults, or older adults are significantly limited over the trials which included all categories.
 
-![study_age_based.png](attachment:study_age_based.png)
+![Age Categories](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/study_age_based.png)
 
 **QUESTION 6: What were the most common treatments?**
 
@@ -130,7 +130,7 @@ Finally, I explored the most common treatments for the dominant study - interven
 
 In total, there are 12 interventional means including the categories ’Other’ and ’Not Specified’, of which the administration of drugs dominates.
 
-![intervention_types.png](attachment:intervention_types.png)
+![Intervention Types](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/covid19_clinical_trials/results/intervention_types.png)
 
 
 
