@@ -1,9 +1,9 @@
 # Breast Cancer Multi-Class Classification with Keras
-<hr>
 
 **Core of the investigation:** machine learning study focused on cancer research
 
 **Rough goals of the work:** training a neural network for cancer classification using gene expression data
+<hr>
 
 **NOTE:**
 
