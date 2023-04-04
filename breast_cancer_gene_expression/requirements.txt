@@ -1,0 +1,11 @@
+keras==2.10.0
+matplotlib==3.5.3
+numpy==1.23.5
+pandas==1.5.2
+sklearn==1.2.1
+tensorflow==2.10.0
+IPython==7.31.1
+jupyter_client==7.4.9
+jupyter_core==5.2.0
+notebook==6.3.0
+Python==3.9.16 
