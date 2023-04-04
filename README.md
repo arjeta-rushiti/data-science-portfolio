@@ -1,8 +1,8 @@
 # Data Science Portfolio
-<hr>
 
 Repository containing portfolio of data science projects completed by me for academic and self-learning purposes.<br> 
 Presented in the form of Jupyter notebooks.
+<hr>
 
 **Tools:**
 
