@@ -13,9 +13,9 @@ Presented in the form of Jupyter notebooks.
 
 1. Install dependencies using *requirements.txt* <br>
 2. Run notebooks as usual by using a jupyter notebook server
+<hr>
 
 ### CONTENTS
-<hr>
 
 The table of contents is listed in descending alphabetical order. 
 
