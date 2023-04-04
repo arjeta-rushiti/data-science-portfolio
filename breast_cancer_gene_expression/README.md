@@ -10,9 +10,10 @@
 **Install dependencies using requirements.txt**
 
 **Full Python code is shown in pythonscript.ipynb**
+<hr>
 
 ### TABLE OF CONTENTS:
-<hr>
+
 
 * [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#description-of-the-relevance-of-the-topic)
 * [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/breast_cancer_gene_expression#personal-interest-in-the-topic)
@@ -62,7 +63,7 @@ In the [CuMiDa database](https://sbcb.inf.ufrgs.br/cumida), there are 13 data se
 most of them have high accuracy baselines, the data set under the ID ’GSE26304’ has a benchmark
 accuracy lower than 40 % :
 
-![cumida_benchmark.png](attachment:cumida_benchmark.png)
+![Cumida Benchmark Results](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/breast_cancer_gene_expression/cumida_benchmark.png?raw=true)
 
 This data set corresponds to a breast cancer study which has 4 classes and over 30 000 features.
 
