@@ -51,7 +51,7 @@ This project consists of two parts:
 
 **The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the respective folders, [part_1_KNIME](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_1_KNIME) and [part_2_PostgreSQL](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_2_PostgreSQL), starting with the 'doc' keyword in the filename i.e., doc_*.pdf**
 
-**The preprocessed data from KNIME is uploaded in the [data](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/data) folder**
+**The preprocessed data from KNIME is uploaded in the [data](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/data) folder.**
 
 The general KNIME workflow is given in the figure below. 
 
@@ -70,6 +70,8 @@ This section is divided in terms of the question which were posed.
 </p>
 
 **QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type?**
+
+For demonstration, here, only the first 15 rows from the output are given:
 
 <p align="center">
 <img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/distribution_activities.png">
