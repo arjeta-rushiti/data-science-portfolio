@@ -6,8 +6,10 @@ Presented in the form of Jupyter notebooks.
 
 **Tools:**
 
- - **Python:** NumPy, Pandas, Seaborn, Matplotlib
- - **Machine Learning:** scikit-learn, TensorFlow, Keras
+- **Programming Languages and Libraries:** Python, R, KNIME (low-code programming)
+- **Data Manipulation and Analysis:** Pandas, NumPy, Matplotlib, Seaborn
+- **Machine Learning:** Scikit-Learn, Keras, TensorFlow
+- **Database Management:** PostgreSQL
 
 ### Instructions for Running Python Notebooks Locally
 
@@ -28,5 +30,7 @@ The table of contents is listed in descending alphabetical order.
      - [Predicting Pancreatic Cancer Using Urinary Biomarkers](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers): Building predictive models using a combination of machine learning algorithms with hyperparameter tuning for the diagnosis of pancreatic cancer using urinary biomarkers, in order to improve the diagnostic pathway for affected patients.
 
  - ### Data Analysis and Visualization <br> 
- 
+      
+      - [Identifying Targets Associated with Liver Diseases from ChEMBL Database](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl): exploring the capabilities of KNIME and PostreSQL as powerful platforms for computer-aided drug design
+  
       - [COVID-19 Clinical Trials](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials): Dealing with clinical trials data in the healthcare system using exploratory data analysis.
