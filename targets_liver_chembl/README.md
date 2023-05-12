@@ -49,9 +49,9 @@ This project consists of two parts:
 
 **NOTE:**
 
-**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the respective folders, (part_1_KNIME)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_1_KNIME] and (part_2_PostgreSQL)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_2_PostgreSQL], starting with the 'doc' keyword in the filename i.e., doc_*.pdf**
+**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the respective folders, [part_1_KNIME](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_1_KNIME) and [part_2_PostgreSQL](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_2_PostgreSQL), starting with the 'doc' keyword in the filename i.e., doc_*.pdf**
 
-**The preprocessed data from KNIME is uploaded in the (data)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/data] folder**
+**The preprocessed data from KNIME is uploaded in the [data](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/data) folder**
 
 The general KNIME workflow is given in the figure below. 
 
