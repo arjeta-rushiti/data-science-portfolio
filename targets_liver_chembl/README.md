@@ -55,7 +55,7 @@ This project consists of two parts:
 The general KNIME workflow is given in the figure below. 
 
 <p align="center">
-<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/KNIME_workflow.png" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/KNIME_workflow.png">
 </p>
  
 ### Results
@@ -65,13 +65,13 @@ This section is divided in terms of the question which were posed.
 **QUESTION 1: What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? **
 
 <p align="center">
-<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/targets_cmpounds.png" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/targets_cmpounds.png" width=50% height=50%>
 </p>
 
 **QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type? **
 
 <p align="center">
-<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/distribution_activities.png" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/distribution_activities.png">
 </p>
 
 ### Outlook 
