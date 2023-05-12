@@ -31,10 +31,10 @@ The pipeline is illustrated using the epidermal growth factor receptor (EGFR), b
 Motivated by the capabilities of the KNIME Platform for computer-aided drug design, I decided to explore first hand the effectiveness of KNIME nodes in exploring targets associated with liver diseases in humans, while making the first attempt to work with a large and complex database such as, [ChEMBL](https://www.ebi.ac.uk/chembl/), which contains information on millions of molecules, their properties, and activities against various biological targets.
 In combination, I decided to use PostgreSQL as a relational database to store, analyze, and manage the KNIME extracted data from the ChEMBL database.
 
-Exploring targets and activity of compounds associated with liver diseases from ChEMBL is can help in identifying potential drug targets and lead compounds for liver disease treatment, as well as in gaining insights into the mechanisms underlying the diseases. Consequently, it can help in the development of more effective and targeted treatments for liver diseases.
+Exploring targets and activity of compounds associated with liver diseases from ChEMBL can help in identifying potential drug targets and lead compounds for liver disease treatment, as well as in gaining insights into the mechanisms underlying the diseases. Consequently, it can help in the development of more effective and targeted treatments for liver diseases.
 
 ### Objectives / Posing questions
-To explore the targets associated with liver diseases in humans from the [ChEMBL](https://www.ebi.ac.uk/chembl/) database, the present project tends to investigate the following questions using KNIME and PostgreSQL:
+To explore the targets associated with liver diseases in humans from the [ChEMBL](https://www.ebi.ac.uk/chembl/) database, the present project investigates the following questions using KNIME and PostgreSQL:
 
 * What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? <p></p>
 
@@ -82,6 +82,6 @@ As a low-code data analytics platform, KNIME integrates various components for d
 Furthermore, KNIME provides a wide range of nodes and tools for cheminformatics, including tools for molecular descriptor calculation, ligand-based virtual screening, protein-ligand docking, and chemical structure visualization.
 Therefore, a whole standalone project could be designed and solved solely using KNIME nodes. However, this is beyond the scope of the present project, which is more general and intends to leverage the strengths of two platforms KNIME and PostgreSQL for drug discovery workflows. 
 
-A third part of the poject could also be integrated, which would focus on the visualization of the results using KNIME or some other bussiness intelligence (BI) tool, such as Tableau. 
+A third part of the project could also be integrated, which would focus on the visualization of the results using KNIME or some other bussiness intelligence (BI) tool, such as Tableau. 
 For instance, one could use a bar chart to display the number of compounds tested against each target type associated with liver diseases. For the second question, one could use a box plot to show the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and then use color coding or small multiple charts to show how the distribution varies by target type. 
 Filters can also be added to explore the data based on specific criteria such as target types and compound activities.
