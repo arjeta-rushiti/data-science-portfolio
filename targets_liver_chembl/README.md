@@ -29,7 +29,7 @@ The pipeline is illustrated using the epidermal growth factor receptor (EGFR), b
 ### Personal interest in the topic
 
 Motivated by the capabilities of the KNIME Platform for computer-aided drug design, I decided to explore first hand the effectiveness of KNIME nodes in exploring targets associated with liver diseases in humans, while making the first attempt to work with a large and complex database such as, [ChEMBL](https://www.ebi.ac.uk/chembl/), which contains information on millions of molecules, their properties, and activities against various biological targets.
-In combination, I decided to use PostgreSQL as a relational database to store, analyze, and manage the data extracted from the ChEMBL database.
+In combination, I decided to use PostgreSQL as a relational database to store, analyze, and manage the KNIME extracted data from the ChEMBL database.
 
 Exploring targets and activity of compounds associated with liver diseases from ChEMBL is can help in identifying potential drug targets and lead compounds for liver disease treatment, as well as in gaining insights into the mechanisms underlying the diseases. Consequently, it can help in the development of more effective and targeted treatments for liver diseases.
 
