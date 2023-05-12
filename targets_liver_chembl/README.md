@@ -36,9 +36,9 @@ Exploring targets and activity of compounds associated with liver diseases from 
 ### Objectives / Posing questions
 To explore the targets associated with liver diseases in humans from the [ChEMBL](https://www.ebi.ac.uk/chembl/) database, the present project tends to investigate the following questions using KNIME and PostgreSQL:
 
-* 1. What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? <p></p>
+* What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? <p></p>
 
-* 2. What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type? <br>
+* What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type? <br>
 
 
 ### Methodology
@@ -62,13 +62,13 @@ The general KNIME workflow is given in the figure below.
 
 This section is divided in terms of the question which were posed.
 
-**QUESTION 1: What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? **
+**QUESTION 1: What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans?**
 
 <p align="center">
 <img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/targets_cmpounds.png" width=30% height=30%>
 </p>
 
-**QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type? **
+**QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type?**
 
 <p align="center">
 <img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/distribution_activities.png">
