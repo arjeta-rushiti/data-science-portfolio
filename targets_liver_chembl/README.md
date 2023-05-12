@@ -7,14 +7,13 @@
 
 ### TABLE OF CONTENTS:
 
-* [Description of the relevance of the topic]()
-* [Personal interest in the topic]()
-* [State of research]()
-* [Knowledge gap]()
-* [Objectives / Posing questions]()
-* [Methodology]()
-* [Results]()
-* [Outlook]()
+* [Description of the relevance of the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#description-of-the-relevance-of-the-topic)
+* [State of research](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#state-of-research)
+* [Personal interest in the topic](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#personal-interest-in-the-topic)
+* [Objectives / Posing questions](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#objectives--posing-questions)
+* [Methodology](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#methodology)
+* [Results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#results)
+* [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl#outlook)
 
 
 ### Description of the relevance of the topic
@@ -50,20 +49,15 @@ This project consists of two parts:
 
 **NOTE:**
 
-**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the files named with the 'doc' keyword at the beginnng, i.e., doc_*.pdf**  
-<hr>
+**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the files named with the 'doc' keyword at the beginnng, i.e., doc_*.pdf**
+**The data is too large to be uploaded here**
 
 The general KNIME workflow is given in the figure below. 
 
 <p align="center">
-<img src="https://" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/KNIME_workflow.png" width=70% height=70%>
 </p>
-
-**NOTE:**
-
-**The PostgreSQL version of the ChEMBL data base is uploaded in the compressed folder chembl.zip, whereas the selected data using KNIME nodes for the present project is given in target_liver.zip**  
-
-  
+ 
 ### Results
 
 This section is divided in terms of the question which were posed.
@@ -71,13 +65,13 @@ This section is divided in terms of the question which were posed.
 **QUESTION 1: What are the target types and how many compounds have been tested against each target type associated with liver diseases in humans? **
 
 <p align="center">
-<img src="https://" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/targets_cmpounds.png" width=70% height=70%>
 </p>
 
 **QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most frequent targets associated with liver diseases, and how does this distribution vary by target type? **
 
 <p align="center">
-<img src="https://" width=70% height=70%>
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/targets_liver_chembl/figures/distribution_activities.png" width=70% height=70%>
 </p>
 
 ### Outlook 
