@@ -2,7 +2,7 @@
 
 **Core of the investigation:** identifying the top target types associated with liver diseases in humans, number of compounds tested against each target type, and their distribution of activities using the ChEMBL database 
 
-**Rough goals of the work:** exploring KNIME and PostreSQL as powerful platforms for computer-aided drug design, while making the first attempt to work with the ChEMBL database 
+**Rough goals of the work:** exploring KNIME and PostgreSQL as powerful platforms for computer-aided drug design, while making the first attempt to work with the ChEMBL database 
 <hr>
 
 ### TABLE OF CONTENTS:
