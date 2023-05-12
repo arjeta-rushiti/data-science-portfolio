@@ -3,15 +3,15 @@ QUESTION 1: What are the target types and how many compounds have been tested ag
 			target type associated with liver diseases in humans?
 */
 
-CREATE VIEW liver_target_compound_count AS         -- create a new view 
-SELECT td.target_type, 							   -- select colums
-	COUNT(DISTINCT act.molregno) AS num_compounds  -- count of distinct compounds 
-FROM target_dictionary td                          -- source table
-JOIN assays ass ON td.tid = ass.tid				   -- join tables
+CREATE VIEW liver_target_compound_count AS         	-- create a new view 
+SELECT td.target_type, 					-- select colums
+	COUNT(DISTINCT act.molregno) AS num_compounds  	-- count of distinct compounds 
+FROM target_dictionary td                         	-- source table
+JOIN assays ass ON td.tid = ass.tid			-- join tables
 JOIN activities act ON ass.assay_id = act.assay_id 
-WHERE ass.description LIKE '%liver%'			   -- filter results
-GROUP BY td.target_type							   -- group results 
-ORDER BY num_compounds DESC;					   -- order results descending	
+WHERE ass.description LIKE '%liver%'			-- filter results
+GROUP BY td.target_type					-- group results 
+ORDER BY num_compounds DESC;				-- order results descending	
 
 /*
 QUESTION 2: What is the distribution of activities for compounds targeting the top 5 most 
@@ -58,8 +58,8 @@ JOIN assays ass ON td.tid = ass.tid
 JOIN activities act ON ass.assay_id = act.assay_id
 WHERE ass.description LIKE '%liver%'
   AND act.standard_value IS NOT NULL				-- filter NULL entries
-  AND td.target_type IN (							-- filter within top 5 targets 
-	  SELECT target_type							-- start of subquery
+  AND td.target_type IN (					-- filter within top 5 targets 
+	  SELECT target_type					-- start of subquery
       FROM target_dictionary
       JOIN assays ON target_dictionary.tid = assays.tid
       JOIN activities ON assays.assay_id = activities.assay_id
@@ -67,7 +67,7 @@ WHERE ass.description LIKE '%liver%'
       GROUP BY target_type
       ORDER BY COUNT(DISTINCT activities.molregno) DESC
       LIMIT 5
-  )													-- end of subquery
+  )								-- end of subquery
 GROUP BY td.target_type, td.pref_name
 ORDER BY td.target_type ASC, avg_activity DESC;
 
