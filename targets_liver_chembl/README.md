@@ -45,12 +45,13 @@ To explore the targets associated with liver diseases in humans from the [ChEMBL
 This project consists of two parts:
 * PART 1: KNIME nodes are used to collect the neccessary data from the ChEMBL database and prepare it for further analysis using SQL queries.
 
-* PART 2: Data is stored in in PostgreSQL and the posed scientific questions above have been investigated using queries.
+* PART 2: Data is stored in PostgreSQL and the posed scientific questions above have been investigated using queries.
 
 **NOTE:**
 
-**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the files named with the 'doc' keyword at the beginnng, i.e., doc_*.pdf**
-**The data is too large to be uploaded here**
+**The detailed documentation for the KNIME workflow and the PostgreSQL queries is given in the respective folders, (part_1_KNIME)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_1_KNIME] and (part_2_PostgreSQL)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/part_2_PostgreSQL], starting with the 'doc' keyword in the filename i.e., doc_*.pdf**
+
+**The preprocessed data from KNIME is uploaded in the (data)[https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl/data] folder**
 
 The general KNIME workflow is given in the figure below. 
 
