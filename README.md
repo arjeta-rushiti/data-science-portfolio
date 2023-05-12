@@ -31,6 +31,6 @@ The table of contents is listed in descending alphabetical order.
 
  - ### Data Analysis and Visualization <br> 
       
-      - [Identifying Targets Associated with Liver Diseases from ChEMBL Database](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl): exploring the capabilities of KNIME and PostreSQL as powerful platforms for computer-aided drug design
+      - [Identifying Targets Associated with Liver Diseases from ChEMBL Database](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl): exploring the capabilities of KNIME and PostgreSQL as powerful platforms for computer-aided drug design
   
       - [COVID-19 Clinical Trials](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials): Dealing with clinical trials data in the healthcare system using exploratory data analysis.
