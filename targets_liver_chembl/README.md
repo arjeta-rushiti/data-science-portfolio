@@ -1,6 +1,6 @@
 # Exploring Targets Associated with Liver Diseases from ChEMBL Database
 
-**Core of the investigation:** identifying the top target types associated with liver diseases in humans, number of compounds tested against each target type, and their distribution of activities using the ChEMBL database 
+**Core of the investigation:** identifying the top target types associated with liver diseases in humans, the number of compounds tested against each target type, and their distribution of activities from the ChEMBL database 
 
 **Rough goals of the work:** exploring KNIME and PostgreSQL as powerful platforms for computer-aided drug design, while making the first attempt to work with the ChEMBL database 
 <hr>
