@@ -1,0 +1,784 @@
+---
+title: "Drug Performance Evaluation with RShiny"
+output: html_document
+runtime: shiny
+---
+
+### 1. Import libraries and packages
+
+The necessary packages and libraries used throughout this project are:
+
+```{r packages, echo=T, message=F, results='hide'}
+# LOAD PACKAGES
+# Data manipulation
+library(data.table)
+library(dplyr)
+
+# Visualization
+library(GGally)
+library(ggplot2)
+library(gridExtra)
+library(shiny)
+library(shinydashboard)
+
+# Data summaries
+library(stats)
+```
+
+
+### 2. Load the data
+
+Initially, the data has been loaded in R. For this purpose, the ```fread()``` function
+has been used to store the CSV file as a *data.table* object. 
+The ```fread()``` function from the *data.table* package has been chosen because it is generally
+faster and more memory-efficient than the base R functions for reading in large data sets. 
+Moreover, it automatically detects the delimiter, header row, and data types of the columns, 
+so there is no need to specify them explicitly.
+
+The structure of the data has been explored using the ```str()``` function, which displays the class of the object **dt** ('data.table and data.frame'), the number of observations (685),
+and the number of variables/columns (10).
+
+The columns contain either numeric or categorical data and only their first entry is displayed as specified by the ```vec.len=1``` argument.
+ 
+```{r load}
+# Load data in a data.table object
+dt <- fread("data.csv")
+
+# Explore the structure of the data 
+str(dt, vec.len=1)
+```
+
+### 3. Select relevant features
+
+From the 10 key fields, the columns which are relevant to the objectives of the project have been selected for further analysis.
+Consequently, the columns: 'Indication', 'Reviews', and 'Type' have been dropped. 
+
+The resulting data.table, now consists of seven columns:
+
+1. **Condition** - the medical condition or disease for which the drug has been reviewed
+
+2. **Drug** - the name of the reviewed drug
+
+3. **EaseOfUse** - customer rating that describes how easily a product can be used/handled 
+
+4. **Effective** - customer ratings for the effectivness of the drug
+
+5. **Form** - the form of the drug (e.g., tablet, cream, etc.)
+
+6. **Price** - 	the average price of the drug
+
+7. **Satisfaction** - the satisfaction level of the drug based on customer reviews.
+
+To get a glimpse, for each field, the first few rows have been displayed using the
+```head()``` function.
+
+```{r features}
+# Drop columns which are not necessary for the analysis 
+dt[,  c("Indication", "Reviews", "Type") := NULL]
+
+# Display first few rows of the data
+head(dt)
+```
+
+### 4. Data preprocessing
+
+Once the relevant features have been selected, it is important to ensure that the data is clean
+and properly formatted.
+This includes handling missing values, removing duplicates, and transforming variables.
+
+#### 4.1. Missing values
+
+To check for missing values in multiple columns of the data.table at once, the ```lapply()``` function is used in combination with ```is.na()```, which returns a logical vector with TRUE for missing values and FALSE for non-missing values.
+The ```sum()``` function is then applied to the logical vector of missing values, where TRUE values are treated as 1 and FALSE values as 0. Therefore, ```sum(is.na(x))``` calculates the total number of missing values in the column x.
+The ```lapply()``` function iterates over all columns of the data.table **dt** and returns a list of the counts of missing values in each column which is assigned to the variable **missing_values**.
+
+```{r preprocessing}
+# Check for missing values in n multiple columns of the data.table
+missing_values <- lapply(dt, function(x) sum(is.na(x)))
+missing_values
+```
+
+#### 4.2. Duplicates
+To check for duplicates in the data, the ```duplicated()``` function has been used to create a subset including the duplicate rows, followed by the *if* conditional which filters based on the length of the duplicates vector: if greater than 0 - it means that duplicates were found in the data.table and if the length is 0 - it means that no duplicates were found.
+The duplicate rows have been discarded from the data by including only the first occurrence
+of each unique row.
+
+Here the code snippet that handles duplicates in the data.table:
+
+```{r duplicates, collapse=T}
+# Subset dt to only include the duplicate rows
+duplicates <- dt[duplicated(dt)]
+
+# Check for duplicates
+if (length(duplicates) > 0) {
+  print("Duplicates found in the data.table.")
+} else {
+  print("No duplicates found in the data.table.")
+}
+
+# Display duplicate rows
+duplicates
+
+# Drop duplicate rows by keeping only the first occurrence
+dt <- dt[!duplicated(dt)]
+```
+
+#### 4.3. Transforming variables 
+Focusing next on the categorical data, there are 37 unique medical conditions associated with a total of 470 unique drugs. 
+This number of unique values in the 'Condition' and 'Drug' columns is too large, thus, it would be impractical to convert all these levels into factors for further analysis.
+By contrast, the 'Form' column contains 6 unique levels/drug forms: Capsule, Tablet, Cream, Liquid (Drink), Liquid (Inject), and Other. 
+They have been transformed into factors and the count of the number of occurrences for each drug from has been calculated and listed using the ```summary()``` function as shown in the code chunk below:
+ 
+```{r factors, collapse=T}
+# COLUMN 'Condition'
+# Total number of unique entries 
+num_conditions <- uniqueN(dt$Condition)
+num_conditions
+
+# COLUMN 'Drug'
+# Total number of unique entries 
+num_drugs <- uniqueN(dt$Drug)
+num_drugs
+
+# COLUMN 'Form'
+# Total number of unique entries
+num_forms <- uniqueN(dt$Form)
+num_forms
+
+# List unique entries
+forms <- unique(dt$Form)
+forms
+
+# Convert the Form entries into factors
+dt[, Form  := as.factor(Form)]
+
+# Count number of occurrences of each level in the Form factor 
+summary(dt$Form)
+``` 
+ 
+### 5. Exploratory data analysis 
+
+To gain a better understanding, the data has been explored using a variety of techniques such as bar, box, scatter, and density plots, which help in identifying the distribution of the data, outliers, and any trends or relationships between variables.
+
+A reusable function **grouped_bar_plot()** has been defined to generate and display grouped bar plots based on a specified column in the data.
+Inside the function, the number of drugs has been calculated (and stored in the column 'num_drugs' of a new variable **counts**) by grouping the data by the specified ```col_name```. 
+The function then proceeds to create the plot using the ```ggplot()``` function with **counts** as the data source and the aesthetics defined to display the bars of the drug counts in a descending order.
+The grouped bar plot is generated using ```geom_bar()``` function with ```stat = "identity"``` to ensure that the heights of the bars correspond to the values in the 'num_drugs' column, and fill = "steelblue" to fill the bars with the specified color.
+On top of each bar, the drug count from the 'num_drugs' column is displayed as a text label using the ```geom_text()``` function, with the ```vjust``` parameter to adjust the vertical positioning of the labels, and ```color``` and ```size``` parameters to set the color and size of the labels, respectively.
+Other customization include setting the axis labels, plot title, rotating the X axis label by 45° for better readability, and adjusting Y axis limits to ensure that the tallest bar and its label count is visible (the ```ylim``` parameter is set to a range from 0 to 110% of the maximum value in the 'num_drugs' column). 
+Finally, the function returns the plot object **g**. 
+
+The function **grouped_bar_plot()** is invoked twice.
+First, the number of reviewed drugs has been plotted per medical condition and second, the drug count has been plotted per drug form. 
+
+The former plot reveals that the top five medical conditions for which the largest number of drugs has been reviewed are: 
+
+* hypertension (101), 
+
+* atopic dermatitis (67),
+
+* fever (64),
+
+* gastroesophageal reflux disease (54), and
+
+* bacterial urinary tract infection (53).
+
+The latter plot reveals that the most commonly used drugs are in form of tablets (count = 300). 
+
+```{r eda}
+# Function to generate grouped bar plot
+grouped_bar_plot <- function(data, col_name) {
+  # Calculate the number of drugs grouping by a given column
+  counts <- data[, .(num_drugs = .N), by = col_name]
+  
+  # Create the plot
+  g <- ggplot(data = counts,                                          # data source
+              mapping = aes(
+                x = reorder(!!rlang::sym(col_name), -num_drugs),      # order bars descending 
+                y = num_drugs)) + 
+    geom_bar(stat = "identity", fill = "steelblue") +                 # create grouped bar plot
+    geom_text(aes(label = num_drugs),                                 # add bar count label
+              vjust = -0.5, color = "steelblue", size = 3.5) +     
+    ggtitle(paste("Total number of drugs reviewed per", col_name)) +  # add plot title
+    xlab(col_name) +                                                  # set X axis label
+    ylab("Drug Count") +                                              # set Y axis label
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +        # rotate X axis labels
+    coord_cartesian(ylim = c(0, max(counts$num_drugs) * 1.1))         # adjusts the Y axis limits 
+  
+  return(g)                                                                                       
+}
+
+# Generate and print the grouped bar plots
+print(grouped_bar_plot(dt, "Condition"))    # plot drug count per medical condition
+print(grouped_bar_plot(dt, "Form"))         # plot drug count per drug form
+```
+
+The procedure that follows focuses on analyzing different drug forms and their corresponding ratings, including the effectiveness of the drug, ease of use, customer satisfaction, and average price. 
+
+For this purpose, an interactive Shiny dashboard has been developed with two main menu items: 
+
+1. Descriptive Statistics
+
+2. Statistical Inference
+
+as shown here:
+
+```{r, echo=FALSE}
+# Select name of columns with numerical data 
+numeric_col <- names(dt)[sapply(dt, is.numeric)]
+
+# HEADER
+header <- dashboardHeader(title = "Drug Performance Evaluation")
+
+# SIDEBAR
+sidebar <- dashboardSidebar(
+  # Sidebar content
+  sidebarMenu(
+    # Menu items for each tab
+    menuItem("Descriptive Statistics", tabName = "descriptive", icon = icon("chart-bar")),
+    menuItem("Statistical Inference", tabName = "inference", icon = icon("calculator"))
+  )
+)
+
+# BODY
+body <- dashboardBody(
+  # Body content
+  tabItems(
+    # TAB: Descriptive Statistics 
+    tabItem(tabName = "descriptive",
+            # Sidebar for Descriptive Statistics
+            sidebarLayout(
+              sidebarPanel(
+                # Sidebar content for Descriptive Statistics
+                style = "flex: 0 0 auto; max-width: 300px;",        # adjust max-width for the sidebar panel
+                tags$style(".selectize-input { width: 100%; }"),    # adjust width for selectInput
+                checkboxGroupInput("form_checkbox",                 # create checkbox for filtering drug forms
+                                   label = "Filter by drug form:",  
+                                   choices = forms,
+                                   selected = NULL),
+                selectInput("column_select",                        # create dropdown menu for selecting customer review
+                            label = "Select a customer review:", 
+                            choices = numeric_col,
+                            selected =  numeric_col[1])
+              ),
+              # Main panel for Descriptive Statistics
+              mainPanel( 
+                fluidRow(                                 # represent row in a fluid grid system
+                  # Box plot
+                  column(width = 12,                      # define column with a width of 12 (full width)
+                         plotOutput("boxplot")            # renders box plot for the selected data
+                  )
+                ),
+                fluidRow(
+                  # Density plot
+                  column(width = 12,
+                         plotOutput("densityplot")        # render density plot for the selected data
+                  )
+                ),
+                fluidRow(
+                  # Summary section
+                  column(width = 12,
+                         uiOutput("summary_tables")       # render summary stats for the selected data
+                  )
+                )
+              )
+            )
+    ),
+    
+    # TAB: Statistical Inference 
+    tabItem(tabName = "inference",
+            sidebarLayout(
+              # Sidebar for Statistical Inference
+              sidebarPanel(
+                # Sidebar content for Statistical Inference
+                selectInput("correlation_method",         # create dropdown menu for selecting corr. method
+                            label = "Correlation method:",
+                            choices = c("Spearman", "Kendall"),
+                            selected = "Spearman")
+              ),
+              
+              # Main panel for Statistical Inference
+              mainPanel(
+                # Correlogram plot
+                plotOutput("correlogram")                 # render correlogram for the selected corr. method
+              )
+            )
+    )
+  )
+)
+
+# USER-INTERFACE
+ui <- dashboardPage(header, sidebar, body)
+
+# SERVER
+server <- function(input, output) {
+  
+  # CODE FOR THE DESCRIPTIVE STATISTICS TAB
+  # Filter the data based on the selected form(s)
+  filtered_data <- reactive({
+    req(input$form_checkbox)
+    dt %>%
+      filter(Form %in% input$form_checkbox)
+  })
+  
+  # Render the box plot
+  output$boxplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = Form, y = .data[[input$column_select]], fill = Form)) +
+      geom_boxplot() +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Box Plot", x = "Form", y = input$column_select)
+  })
+  
+  # Render the density plot on the filtered data
+  output$densityplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = .data[[input$column_select]], fill = Form)) +
+      geom_density(alpha = 0.5) +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Density Plot", x = input$column_select) +
+      theme(plot.margin = margin(0, 20, 0, 0))
+  })
+  
+  # Generate summary statistics for selected column and form
+  output$summary_tables <- renderUI({
+    req(input$column_select, input$form_checkbox)
+    
+    column_name <- input$column_select
+    form_values <- input$form_checkbox
+    
+    filtered_data <- dt[dt$Form %in% form_values, ]
+    
+    tables <- lapply(form_values, function(forms) {
+      selected_data <- filtered_data[filtered_data$Form == forms, ]
+      
+      summary_stats <- data.frame(
+        Min = min(selected_data[[column_name]]),
+        First_Quantile = quantile(selected_data[[column_name]], 0.25),
+        Median = median(selected_data[[column_name]]),
+        Mean = mean(selected_data[[column_name]]),
+        SD = sd(selected_data[[column_name]]),
+        Third_Quantile = quantile(selected_data[[column_name]], 0.75),
+        Max = max(selected_data[[column_name]])
+      )
+      
+      # Create a table with the form as the table name
+      table_name <- paste("Summary for", forms)
+      table_output <- renderTable(summary_stats)
+      
+      tagList(
+        h4(table_name),
+        table_output
+      )
+    })
+    
+    do.call(tagList, tables)
+  })
+  
+  # CODE FOR THE STATISTICAL INTERFERENCE TAB
+  # Perform correlation analysis based on selected method
+  correlation_analysis <- reactive({
+    method <- switch(input$correlation_method,
+                     "Spearman" = "spearman",
+                     "Kendall" = "kendall")
+    
+    GGally::ggpairs(
+      dt[, ..numeric_col],
+      lower = list(continuous = wrap("points", alpha = 0.5, size = 1)),
+      diag = list(continuous = wrap("densityDiag", fill = "lightblue")),
+      upper = list(continuous = wrap("cor", method = method)),
+      title = paste("Correlogram with", input$correlation_method, "'s Rank-Order Correlation Coefficients Method")
+    )
+  })
+  
+  # Render the correlogram plot
+  output$correlogram <- renderPlot({
+    correlation_analysis()
+  })
+}
+
+# RUN THE SHINY APP
+shinyApp(ui = ui, server = server)
+```
+
+To gain a clear understanding of the Shiny dashboard's functions and the technical details of the dashboard's implementation, the remaining part of this report is structured into two main sections:
+
+* dashboard functions 
+
+* explanation of dashboard code. 
+
+In the first section, the various functions and capabilities of the Shiny dashboard will be explored for each menu item. 
+This includes an overview of the interactive features available to the users, such as user interface elements, and an explanation of how they facilitate data exploration and analysis.
+
+In the second section, an in-depth explanation of the underlying code that makes up the Shiny dashboard will be provided. I will discuss the structure of the code, including the user interface (UI) and server components, and explain the purpose and functionality of each code section. This section will offer a comprehensive understanding of how the dashboard was developed and how it enables the interactive data exploration and analysis.
+
+#### 5.1. Shiny Dashboard's functions 
+
+**MENU: Descriptive Statistics**
+
+In the descriptive statistics section of the dashboard, the sidebar offers two options:
+
+* **Filter by drug form:** Users can select one or more checkboxes corresponding to the drug forms they are interested in analyzing (i.e., tablet, capsule, cream, liquid (drink), liquid (inject), and other).
+
+* **Select customer rating:**: Users can select a rating of interest from a dropdown menu. The available ratings include the effectiveness of the drug, ease of use, customer satisfaction, and average price.
+
+Upon selecting at least one drug form checkbox and choosing a rating, the dashboard generates box plots and density plots to visualize the distribution of the selected data. These plots provide insights into the variation and spread of ratings for the chosen drug forms.
+
+Additionally, a statistical summary is presented, including minimum, maximum, median, mean, standard deviation (SD) 1st and 3rd quartiles. This summary provides a concise overview of the selected data, allowing users to understand the central tendency and spread of ratings for the chosen drug forms.
+
+Furthermore, users have the flexibility to analyze the distribution of data for multiple drug forms simultaneously. By selecting multiple drug form checkboxes, the dashboard generates visualizations and statistical summaries that allow for comparisons and insights into the ratings across different drug forms.
+
+
+**MENU: Statistical Inference**
+
+The second menu item of the dashboard, titled "Statistical Inference," offers more advanced statistical techniques for analyzing the data. Within this menu, there is a dropdown menu that provides two options for correlation analysis: Spearman and Kendall rank-based correlation coefficient methods.
+
+When either of these options is selected, a correlogram is generated.
+The top section of the correlogram presents the correlation coefficients and computed p-values of the correlation test, enabling the identification of relationships between all numerical pairs of variables in the dataset.
+In the correlogram, the diagonal section showcases the distributions of the variables, providing insights into their individual characteristics. On the other hand, the bottom section of the correlogram displays scatterplots, illustrating the relationship between variables in a graphical format.
+
+The inclusion of the Spearman rank-based and Kendall methods as options for correlation analysis is motivated by their robustness to outliers and ties within the data. Unlike other methods, these approaches do not rely on specific distribution assumptions, making them suitable for analyzing datasets with non-normal or non-linear relationships. This flexibility allows for a more comprehensive examination of the data and enables the identification of associations that may not be captured by traditional correlation measures.
+
+#### 5.2. Explanation of Shiny Dashboard's code
+
+The code that makes up the Shiny Dashboard consists of two main code chunks:
+
+1. user-interface
+
+2. server
+
+Before diving into the documentation of these, it is important to note that the columns with numerical data have been selected and stored in the variable **numeric_col**:
+
+```{r numeric_columns, eval=F}
+# Select name of columns with numerical data 
+numeric_col <- names(dt)[sapply(dt, is.numeric)]
+```
+
+**USER-INTERFACE**
+
+The user interface is made up of the dashboards header, sidebar and body.
+
+* **Header**: 
+
+```{r dashboard_header, eval=F}
+# HEADER
+header <- dashboardHeader(title = "Drug Performance Evaluation")
+```
+
+This code uses the ```dashboardHeader()``` function to generate a dashboard header with the title "Drug Performance Evaluation", which is stored in the **header**' variable.
+
+* **Sidebar**:
+
+```{r dashboard_sidebar, eval=F}
+# SIDEBAR
+sidebar <- dashboardSidebar(
+  # Sidebar content
+  sidebarMenu(
+    # Menu items for each tab
+    menuItem("Descriptive Statistics", tabName = "descriptive", icon = icon("chart-bar")),
+    menuItem("Statistical Inference", tabName = "inference", icon = icon("calculator"))
+  )
+)
+```
+
+This code defines the sidebar component of the dashboard using the ```dashboardSidebar()``` function.
+Two individual menu items have been generated within the sidebar menu: "Descriptive Statistics" and "Statistical Inference", each associated with a specific tabName and an icon. The resulting sidebar is stored in the **sidebar** variable.
+
+* **Body**:
+```{r dashboard_body, eval=F}
+# BODY
+body <- dashboardBody(
+  # Body content
+  tabItems(
+    # TAB: Descriptive Statistics 
+    tabItem(tabName = "descriptive",
+            # Sidebar for Descriptive Statistics
+            sidebarLayout(
+              sidebarPanel(
+                # Sidebar content for Descriptive Statistics
+                style = "flex: 0 0 auto; max-width: 300px;",        # adjust max-width for the sidebar panel
+                tags$style(".selectize-input { width: 100%; }"),    # adjust width for selectInput
+                checkboxGroupInput("form_checkbox",                 # create checkbox for filtering drug forms
+                                   label = "Filter by drug form:",  
+                                   choices = forms,
+                                   selected = NULL),
+                selectInput("column_select",                        # create dropdown menu for selecting customer review
+                            label = "Select a customer review:", 
+                            choices = numeric_col,
+                            selected =  numeric_col[1])
+              ),
+              # Main panel for Descriptive Statistics
+              mainPanel( 
+                fluidRow(                                 # represent row in a fluid grid system
+                  # Box plot
+                  column(width = 12,                      # define column with a width of 12 (full width)
+                         plotOutput("boxplot")            # renders box plot for the selected data
+                  )
+                ),
+                fluidRow(
+                  # Density plot
+                  column(width = 12,
+                         plotOutput("densityplot")        # render density plot for the selected data
+                  )
+                ),
+                fluidRow(
+                  # Summary section
+                  column(width = 12,
+                         uiOutput("summary_tables")       # render summary stats for the selected data
+                  )
+                )
+              )
+            )
+    ),
+    
+    # TAB: Statistical Inference 
+    tabItem(tabName = "inference",
+            sidebarLayout(
+              # Sidebar for Statistical Inference
+              sidebarPanel(
+                # Sidebar content for Statistical Inference
+                selectInput("correlation_method",         # create dropdown menu for selecting corr. method
+                            label = "Correlation method:",
+                            choices = c("Spearman", "Kendall"),
+                            selected = "Spearman")
+              ),
+              
+              # Main panel for Statistical Inference
+              mainPanel(
+                # Correlogram plot
+                plotOutput("correlogram")                 # render correlogram for the selected corr. method
+              )
+            )
+    )
+  )
+)
+```
+
+The body of the dashboard has been generated using the *dashboardBody()* function with two tab items,
+each with its own sider bar and main panel.
+
+The first tab item corresponds to the menu item "Descriptive Analysis" as linked by the ```tabName = "descriptive"```. 
+Its layout for the sidebar panel is set to the maximum width of 300 pixels with the ability to adjust the width of the selectInput widget.
+The sidebar components include a checkbox labeled Filter by drug form:", where the choices include the unique drug forms (i.e., recall ```forms <- unique(dt$Form)```  which are: Tablet, Cream, Capsule, Liquid (Drink), Liquid (Inject), and Other), and the initially none of them is chosen, ```selected = NULL```.
+The main panel of this tab consists of three rows in a fluid grid system, with the column widths set to 12 (full-width). 
+The output of each row is rendered dynamically upon the selected drug form and review such that in the first row a box plot is rendered, followed by the density plot in the second row, and the summary statistics in the third one.
+
+The second tab item is associated with the menu "Statistical Inference" as linked by the ```tabName = "inference"```. 
+Its sidebar consists of a single dropdown menu labeled "Correlation Method", where the user can choose between two options: Spearman and Kendall correlation analysis, ```choices = c("Spearman", "Kendall")```, such that the Spearman method is chosen by default (```selected = "Spearman"```). The main panel of this tab renders the correlogram based on the chosen correlation method,  ```plotOutput("correlogram")```.
+
+Finally, the user-interface has been defined with its components:
+```{r ui, eval=F}
+# USER-INTERFACE
+ui <- dashboardPage(header, sidebar, body)
+```
+
+**SERVER**
+
+The server function is responsible for handling the inputs from the user interface (UI) and generating the corresponding outputs.
+
+Here is the corresponding code that defines the server-side functionality of the Shiny dashboard:
+
+```{r server, eval=F}
+# SERVER
+server <- function(input, output) {
+  
+  # CODE FOR THE DESCRIPTIVE STATISTICS TAB
+  # Filter the data based on the selected drug form(s)
+  filtered_data <- reactive({
+    req(input$form_checkbox)
+    dt %>%
+      filter(Form %in% input$form_checkbox)
+  })
+  
+  # Render the box plot based on the filtered data
+  output$boxplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = Form, y = .data[[input$column_select]], fill = Form)) +
+      geom_boxplot() +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Box Plot", x = "Form", y = input$column_select)
+  })
+  
+  # Render the density plot on the filtered data
+  output$densityplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = .data[[input$column_select]], fill = Form)) +
+      geom_density(alpha = 0.5) +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Density Plot", x = input$column_select) +
+      theme(plot.margin = margin(0, 20, 0, 0))
+  })
+  
+  # Generate summary statistics for selected column and form
+  output$summary_tables <- renderUI({
+    req(input$column_select, input$form_checkbox)
+    
+    column_name <- input$column_select
+    form_values <- input$form_checkbox
+    
+    filtered_data <- dt[dt$Form %in% form_values, ]
+    
+    tables <- lapply(form_values, function(forms) {
+      selected_data <- filtered_data[filtered_data$Form == forms, ]
+      
+      summary_stats <- data.frame(
+        Min = min(selected_data[[column_name]]),
+        First_Quantile = quantile(selected_data[[column_name]], 0.25),
+        Median = median(selected_data[[column_name]]),
+        Mean = mean(selected_data[[column_name]]),
+        SD = sd(selected_data[[column_name]]),
+        Third_Quantile = quantile(selected_data[[column_name]], 0.75),
+        Max = max(selected_data[[column_name]])
+      )
+      
+      # Create a table with the form as the table name
+      table_name <- paste("Summary for", forms)
+      table_output <- renderTable(summary_stats)
+      
+      tagList(
+        h4(table_name),
+        table_output
+      )
+    })
+    
+    do.call(tagList, tables)
+  })
+  
+  # CODE FOR THE STATISTICAL INTERFERENCE TAB
+  # Perform correlation analysis based on selected method
+  correlation_analysis <- reactive({
+    method <- switch(input$correlation_method,
+                     "Spearman" = "spearman",
+                     "Kendall" = "kendall")
+    
+    GGally::ggpairs(
+      dt[, ..numeric_col],
+      lower = list(continuous = wrap("points", alpha = 0.5, size = 1)),
+      diag = list(continuous = wrap("densityDiag", fill = "lightblue")),
+      upper = list(continuous = wrap("cor", method = method)),
+      title = paste("Correlogram with", input$correlation_method, "'s Rank-Order Correlation Coefficients Method")
+    )
+  })
+  
+  # Render the correlogram plot
+  output$correlogram <- renderPlot({
+    correlation_analysis()
+  })
+}
+```
+
+The server can be thought of consisting of two main code sections - each for one tab item.
+
+* **Code for the Descriptive Statistics tab**
+
+In the code section that correspond to the first tab "Descriptive Statistics", initially, the data is filtered (and stored in the **filtered_data** variable) based on the selected form(s) from the checkbox group input (```form_checkbox```), where the ```req()``` function ensures that the input is available before executing the code:
+
+```{r filter_data, eval=F}
+  # CODE FOR THE DESCRIPTIVE STATISTICS TAB
+  # Filter the data based on the selected drug form(s)
+  filtered_data <- reactive({
+    req(input$form_checkbox)
+    dt %>%
+      filter(Form %in% input$form_checkbox)
+  })
+```
+
+Next, the ```renderPlot()``` function generates a box plot (stored in the **output$boxplot** variable) based on the filtered data, such that the X-axis represents the "Form" variable, the Y-axis represents the selected column (```input$column_select```), and the fill color is based on the "Form" variable. The plot is customized with additional settings such as ```scale_fill_discrete```, ```labs```, and ```title```.
+
+
+```{r boxplot, eval=F}
+  # Render the box plot based on the filtered data
+  output$boxplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = Form, y = .data[[input$column_select]], fill = Form)) +
+      geom_boxplot() +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Box Plot", x = "Form", y = input$column_select)
+  })
+```
+
+Proceeding the box plot, another ```renderPlot()``` function generates a density plot (stored in the **output$densityplot** variable) based on the filtered data, such that the X-axis represents the selected column (customer review), and the fill color is based on the "Form" variable. Additional settings such as ```scale_fill_discrete```, ```labs```, and ```theme``` are applied to customize the plot.
+
+```{r densityplot, eval=F}
+  # Render the density plot on the filtered data
+  output$densityplot <- renderPlot({
+    ggplot(filtered_data(), aes(x = .data[[input$column_select]], fill = Form)) +
+      geom_density(alpha = 0.5) +
+      scale_fill_discrete(name = "Form") +
+      labs(title = "Density Plot", x = input$column_select) +
+      theme(plot.margin = margin(0, 20, 0, 0))
+  })
+```
+
+Finally, ```renderUI()``` function generates summary statistics tables for each selected form. The code calculates summary statistics (minimum, first quartile, median, mean, standard deviation, third quartile, maximum) for the selected column (```input$column_select```) within each form. The tables are created using ```renderTable()```, and the results are organized into a ```tagList()```.
+The resulting output is stored in the variable **output$summary_tables**:
+
+```{r summary_stats, eval=F}
+# Generate summary statistics for selected column and form
+  output$summary_tables <- renderUI({
+    req(input$column_select, input$form_checkbox)
+    
+    column_name <- input$column_select
+    form_values <- input$form_checkbox
+    
+    filtered_data <- dt[dt$Form %in% form_values, ]
+    
+    tables <- lapply(form_values, function(forms) {
+      selected_data <- filtered_data[filtered_data$Form == forms, ]
+      
+      summary_stats <- data.frame(
+        Min = min(selected_data[[column_name]]),
+        First_Quantile = quantile(selected_data[[column_name]], 0.25),
+        Median = median(selected_data[[column_name]]),
+        Mean = mean(selected_data[[column_name]]),
+        SD = sd(selected_data[[column_name]]),
+        Third_Quantile = quantile(selected_data[[column_name]], 0.75),
+        Max = max(selected_data[[column_name]])
+      )
+      
+      # Create a table with the form as the table name
+      table_name <- paste("Summary for", forms)
+      table_output <- renderTable(summary_stats)
+      
+      tagList(
+        h4(table_name),
+        table_output
+      )
+    })
+    
+    do.call(tagList, tables)
+  })
+```
+
+* **Code for the Statistical Inference tab**
+
+In the code section that correspond to the second tab "Statistical inference", the ```reactive function()``` performs correlation analysis based on the selected correlation method (```input$correlation_method```). The method is determined using a ```switch``` statement. The ```GGally::ggpairs``` function is used to generate a correlogram plot, which displays pairwise scatter plots and correlation coefficients for the numeric columns in the data. The output of the correlation analysis is stored in the variable **correlation_analysis**, which is used withtin the ```renderPlot()``` function to generate the correlogram. The plot is customized with settings such as ```lower```, ```diag```, ```upper```, and ```title```:
+
+```{r}
+  # CODE FOR THE STATISTICAL INTERFERENCE TAB
+  # Perform correlation analysis based on selected method
+  correlation_analysis <- reactive({
+    method <- switch(input$correlation_method,
+                     "Spearman" = "spearman",
+                     "Kendall" = "kendall")
+    
+    GGally::ggpairs(
+      dt[, ..numeric_col],
+      lower = list(continuous = wrap("points", alpha = 0.5, size = 1)),
+      diag = list(continuous = wrap("densityDiag", fill = "lightblue")),
+      upper = list(continuous = wrap("cor", method = method)),
+      title = paste("Correlogram with", input$correlation_method, "'s Rank-Order Correlation Coefficients Method")
+    )
+  })
+  
+  # Render the correlogram plot
+  output$correlogram <- renderPlot({
+    correlation_analysis()
+  })
+```
+
+In the final step, the Shiny app is created with the defined user-interface and server functionality:
+
+```{r run_app, eval=F}
+# RUN THE SHINY APP
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
