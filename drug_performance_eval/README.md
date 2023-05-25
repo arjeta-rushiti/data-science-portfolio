@@ -4,6 +4,7 @@
 
 In this project, the performance of drugs in six forms (tablet, capsule, cream, liquid (drink), liquid (inject), and other) has been investigated based on the customer ratings: effective, ease of use, satisfaction, and average price. 
 For this purpose, a Shiny dashboard had been created in R with two menu items: one for descriptive statistics and the second for correlation analysis. 
+
 Here is a screenshot of the RShiny dashboard:
 
 <p align="center">
@@ -24,7 +25,6 @@ The visualizations are stored in the directory [results](https://github.com/arje
 ## Results
 
 ### [Descriptive statistics](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/descriptive_statistics)
-<hr>
 
 [**Effective**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/effective.pdf)
 
@@ -90,7 +90,6 @@ As individual preferences may vary based on specific needs, conditions, and pers
 additional factors such as side effects, convenience, and specific medical requirements should also be taken into account when determining the preferred drug form for a particular situation.
 
 ### [Statistical inference](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/statistical_inference)
-<hr>
 
 Based on the [Spearman](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/spearman_correlation.pdf) ([Kendall](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/kendall_correlation.pdf)) rank-based correlation coefficients, the following relationships can be observed:
 
