@@ -3,7 +3,7 @@
 **Brief summary:**
 
 In this project, the performance of drugs in six forms (tablet, capsule, cream, liquid (drink), liquid (inject), and other) has been investigated based on the customer ratings: effective, ease of use, satisfaction, and average price. 
-For this purpose, a Shiny dashboard had been created in R with two menu items: one for descriptive statistics and the second for correlation analysis. 
+For this purpose, a Shiny dashboard had been created in R with two menu items: one for descriptive statistics and the second one for correlation analysis. 
 
 Here is a screenshot of the RShiny dashboard:
 
