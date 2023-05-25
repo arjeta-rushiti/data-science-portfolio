@@ -21,9 +21,10 @@ The visualizations are stored in the directory [results](https://github.com/arje
 * [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval#outlook)
 
  
-### Results
+## Results
 
-#### [Descriptive statistics](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/descriptive_statistics)
+### [Descriptive statistics](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/descriptive_statistics)
+<hr>
 
 [**Effective**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/effective.pdf)
 
@@ -88,7 +89,8 @@ It is, however, important to note that these conclusions have been made solely b
 As individual preferences may vary based on specific needs, conditions, and personal preferences, 
 additional factors such as side effects, convenience, and specific medical requirements should also be taken into account when determining the preferred drug form for a particular situation.
 
-#### [Statistical inference](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/statistical_inference)
+### [Statistical inference](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/statistical_inference)
+<hr>
 
 Based on the [Spearman](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/spearman_correlation.pdf) ([Kendall](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/kendall_correlation.pdf)) rank-based correlation coefficients, the following relationships can be observed:
 
@@ -106,7 +108,7 @@ Based on the [Spearman](https://github.com/arjeta-rushiti/data-science-portfolio
 
 The *** indicates that the correlation coefficients are statistically significant at a very high level of confidence, suggesting that the observed correlations are highly unlikely to be due to random chance, whereas the absence of an asterisk indicates that the correlation is not statistically significant. 
 
-### Outlook 
+## Outlook 
 The scatter plots make it easy to see the kind of the relationships present in the data. In addition, they provide insight into the strength and direction of the relationship, which is then confirmed with the calculated correlation coefficients.
 However, the correlation coefficients only measure the strength of the association, not its magnitude (i.e., how much does one variable increase or decrease with increasing values of the other). Moreover, relationships between more than 2 variables simply can’t be assessed using a basic correlation coefficient.
 
