@@ -4,21 +4,28 @@
 
 In this project, the performance of drugs in six forms (tablet, capsule, cream, liquid (drink), liquid (inject), and other) has been investigated based on the customer ratings: effective, ease of use, satisfaction, and average price. 
 For this purpose, a Shiny dashboard had been created in R with two menu items: one for descriptive statistics and the second for correlation analysis. 
+Here is a screenshot of the RShiny dashboard:
+
+<p align="center">
+<img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/dashboard_screenshot.png">
+</p>
 
 Prior to the exploratory data analysis the data set has been downloaded from [Kaggle](https://www.kaggle.com/datasets/thedevastator/drug-performance-evaluation), cleaned, formatted, and preprocessed to include only the columns. 
+
+The visualizations are stored in the directory [results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results), and can be easily accessed by clicking on the headers/sections of the Results part. 
 
 <hr>
 
 ### TABLE OF CONTENTS:
-* [Results]()
-* [Outlook]()
+* [Results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval#results)
+* [Outlook](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval#outlook)
 
  
 ### Results
 
-#### Descriptive statistics
+#### [Descriptive statistics](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/descriptive_statistics)
 
-**Effective**
+[**Effective**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/effective.pdf)
 
 From the summary of the distribution on customer ratings for how effective the drugs are based on their form, several observations can be made:
 
@@ -32,11 +39,7 @@ From the summary of the distribution on customer ratings for how effective the d
 
 * Overall, Cream and Liquid (Drink) appear to have higher effectiveness ratings compared to the other drug forms.
 
-<p align="center">
-<img src="">
-</p>
-
-**Ease of use**
+[**Ease of use**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/ease_of_use.pdf)
 
 By comparing the summary statistics for the ease of use ratings, the following observations can be drawn:
 
@@ -48,11 +51,7 @@ By comparing the summary statistics for the ease of use ratings, the following o
 
 * Other drug form has similar median and mean ratings to Capsule, indicating that customers found them equally easy to use.
 
-<p align="center">
-<img src="">
-</p>
-
-**Satisfaction**
+[**Satisfaction**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/satisfaction.pdf)
 
 By comparing the summary statistics for the satisfaction ratings, the following observations can be drawn:
 
@@ -64,11 +63,7 @@ By comparing the summary statistics for the satisfaction ratings, the following 
 
 * The standard deviation values suggest that Liquid (Inject) and Other have higher variability in satisfaction ratings, indicating more diverse opinions among users.
 
-<p align="center">
-<img src="">
-</p>
-
-**Average price**
+[**Average price**](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/descriptive_statistics/price.pdf)
 
 By comparing the summary statistics for the reported average price of the drugs, the following observations can be drawn:
 
@@ -89,17 +84,13 @@ Based on these observations, some general conclusions can be made:
 
 * Liquid (Inject) may have lower preference due to its lower effectiveness ratings and higher average price.
 
-<p align="center">
-<img src="">
-</p>
-
 It is, however, important to note that these conclusions have been made solely based on the provided ratings. 
 As individual preferences may vary based on specific needs, conditions, and personal preferences, 
 additional factors such as side effects, convenience, and specific medical requirements should also be taken into account when determining the preferred drug form for a particular situation.
 
-#### Statistical inference
+#### [Statistical inference](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results/statistical_inference)
 
-Based on the Spearman (Kendall) rank-based correlation coefficients, the following relationships can be observed:
+Based on the [Spearman](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/spearman_correlation.pdf) ([Kendall](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/results/statistical_inference/kendall_correlation.pdf)) rank-based correlation coefficients, the following relationships can be observed:
 
 * **Effective vs. Ease of Use**: The correlation coefficient of 0.636*** (0.502***) indicates a moderate positive correlation between the effectiveness and ease of use ratings. This suggests that drugs with higher effectiveness tend to have higher ratings for ease of use. The linear-like scatter plot also supports this positive relationship.
 
@@ -114,7 +105,6 @@ Based on the Spearman (Kendall) rank-based correlation coefficients, the followi
 * **Satisfaction vs. Price**: The correlation coefficient of -0.107** (-0.072**) suggests a weak negative correlation between the satisfaction and price ratings. This implies that drugs with higher levels of satisfaction tend to be associated with slightly lower prices, although the strength of the relationship is weak as indicated by two asterisks.
 
 The *** indicates that the correlation coefficients are statistically significant at a very high level of confidence, suggesting that the observed correlations are highly unlikely to be due to random chance, whereas the absence of an asterisk indicates that the correlation is not statistically significant. 
-
 
 ### Outlook 
 The scatter plots make it easy to see the kind of the relationships present in the data. In addition, they provide insight into the strength and direction of the relationship, which is then confirmed with the calculated correlation coefficients.
