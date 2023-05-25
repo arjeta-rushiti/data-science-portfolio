@@ -1,7 +1,6 @@
 # Data Science Portfolio
 
 Repository containing portfolio of data science projects completed by me for academic and self-learning purposes.<br> 
-Presented in the form of Jupyter notebooks.
 <hr>
 
 **Tools:**
@@ -30,7 +29,7 @@ The table of contents is listed in descending alphabetical order.
      - [Predicting Pancreatic Cancer Using Urinary Biomarkers](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/pancreatic_cancer_urinary_biomarkers): Building predictive models using a combination of machine learning algorithms with hyperparameter tuning for the diagnosis of pancreatic cancer using urinary biomarkers, in order to improve the diagnostic pathway for affected patients.
 
  - ### Data Analysis and Visualization <br> 
-      
-      - [Exploring Targets Associated with Liver Diseases from ChEMBL Database](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl): exploring the capabilities of KNIME and PostgreSQL as powerful platforms for computer-aided drug design
+      - [Drug Performance Evaluation with RShiny](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval): Statistical analysis of customer ratings using R and Shiny Dashboard 
+      - [Exploring Targets Associated with Liver Diseases from ChEMBL Database](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/targets_liver_chembl): Exploring the capabilities of KNIME and PostgreSQL as powerful platforms for computer-aided drug design
   
       - [COVID-19 Clinical Trials](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/covid19_clinical_trials): Dealing with clinical trials data in the healthcare system using exploratory data analysis.
