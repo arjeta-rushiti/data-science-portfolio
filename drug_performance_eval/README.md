@@ -15,6 +15,8 @@ Prior to the exploratory data analysis the data set has been downloaded from [Ka
 
 The visualizations are stored in the directory [results](https://github.com/arjeta-rushiti/data-science-portfolio/tree/main/drug_performance_eval/results), and can be easily accessed by clicking on the headers/sections of the Results part. 
 
+The complete code is given in the file [r_script.R](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/r_script.R), whereas the corresponding documentation is given in the file [code_documentation.Rmd](https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/drug_performance_eval/code_documentation.Rmd).
+
 <hr>
 
 ### TABLE OF CONTENTS:
