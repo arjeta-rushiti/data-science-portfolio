@@ -48,7 +48,7 @@ in urine.
 PancRISK is a model based on five predictors: a biomarker panel consisting of three proteins (LYVE1, REG1B, and TFF1), urine creatinine, and age, which is able to discriminate between healthy (control) and PDAC specimens, as well as between PDAC cancer patients and samples obtained from individuals with chronic pancreatitis and other benign hepatobiliary diseases, which
 represent a challenge in early detection of PDAC because of the overlapping symptoms. 
 
-Debernardi et al. performed statistical analyses in R, with bootstrap cross-validation to avoid overfitting. They considered two groups; the first group compromised healthy controls and PDAC samples, whereas the second group compromised samples of patients with PDAC and other benign condition. 
+[Debernardi et al.](https://doi.org/10.1371/journal.pmed.1003489) performed statistical analyses in R, with bootstrap cross-validation to avoid overfitting. They considered two groups; the first group compromised healthy controls and PDAC samples, whereas the second group compromised samples of patients with PDAC and other benign condition. 
 For both groups, a logistic regression model with a binary outcome was fitted to the training and validation data sets after a random division of the whole available data in a 1:1 ratio. The performance of PancRISK predictior model was evaluated using a receiver operating characteristics (ROC) curve analysis approach, specifically, in terms of the area under the ROC curve (AUC).
 
 In discriminating healthy controls from PDAC samples, the resulting AUCs are 0.936 and 0.929 (mean of 0.936, 0.922, and 0.929 for stages I–II, III–IV, and I–IV of PDAC) in the training and validation data sets, respectively. In discriminating benign samples from those with PDAC, the resulting AUCs are 0.862 and 0.848 (mean of 0.871, 0.824, 0.849 for stages I–II, III–IV, and I–IV of PDAC) in the training and validation data sets, respectively.
@@ -66,7 +66,7 @@ The aim of this project is to assess the individual performance of other commonl
 
 ### Methodology
 
-In this project, I have used the data from Debernardi et al. to evaluate the performance of Random Forest, Support Vector Machine, K-Nearest Neighbor, with grid search hyperparameter tuning. After finding the hyperparameters which give the best results for each model, I have applied the Max Voting Ensemble Method to predict a final diagnosis.
+In this project, I have used the data from [Debernardi et al.](https://doi.org/10.1371/journal.pmed.1003489) to evaluate the performance of Random Forest, Support Vector Machine, K-Nearest Neighbor, with grid search hyperparameter tuning. After finding the hyperparameters which give the best results for each model, I have applied the Max Voting Ensemble Method to predict a final diagnosis.
 
 The overall methodology can be divided in five steps as follows:
 
@@ -84,13 +84,13 @@ The overall methodology can be divided in five steps as follows:
 
 The table below summarizes all computed results.
 It includes the performance scores (training and testing accuracy and AUC scores) for the three classifiers: RF, SVC, and KNN, as well as for the VottingClassifier ensemble. For each classifier, the best performing hyperparameters as selected
-from the grid search are also listed. In addition, the table displays the training and validation AUC scores reported by Debernardi et al. using a bootstrap aggregation of a logistic regression model.
+from the grid search are also listed. In addition, the table displays the training and validation AUC scores reported by [Debernardi et al.](https://doi.org/10.1371/journal.pmed.1003489) using a bootstrap aggregation of a logistic regression model.
 
-Focusing on the training accuracy which is simply the percentage of correct predictions across the individual ML models, it is clear that all perform similarly with a very small difference in the score (accuracy around 0.867). An improvement is seen when using the VotingClassifier such that the training accuracy is increased to 0.918. On the other hand, the testing accuracy is very close to the training one, with the exception of the SVC classifier, in which the testing accuracy exceeds the training one by 0.059 (5.9 %). Although not too large, most likely culprit for this deviation is the train/test split percentage, hence a possible solution would be to use 50 % of the data to train on, and 50 % to validate the model, as it was done by Debernardi et al.
+Focusing on the training accuracy which is simply the percentage of correct predictions across the individual ML models, it is clear that all perform similarly with a very small difference in the score (accuracy around 0.867). An improvement is seen when using the VotingClassifier such that the training accuracy is increased to 0.918. On the other hand, the testing accuracy is very close to the training one, with the exception of the SVC classifier, in which the testing accuracy exceeds the training one by 0.059 (5.9 %). Although not too large, most likely culprit for this deviation is the train/test split percentage, hence a possible solution would be to use 50 % of the data to train on, and 50 % to validate the model, as it was done by [Debernardi et al.](https://doi.org/10.1371/journal.pmed.1003489).
 
 Judging the performance of the models based on the AUC scores which compares the relation between True Positive Rate and False Positive Rate, a high AUC train and test score (>0.940) is obtained across all models indicating that all classifiers can effectively distinguish between healthy and cancer patients, with the RF outperforming the rest.
 
-However, to be able to draw more direct comparisons with the published results, the AUC score should be determined at different thresholds of sensitivity (SN) and specificity (SP). I note that Debernardi et al. report the AUC scores at a pre-selected cutoff of >80 % for the affiliated PancRISK score.
+However, to be able to draw more direct comparisons with the published results, the AUC score should be determined at different thresholds of sensitivity (SN) and specificity (SP). I note that [Debernardi et al.](https://doi.org/10.1371/journal.pmed.1003489) report the AUC scores at a pre-selected cutoff of >80 % for the affiliated PancRISK score.
 
 <p align="center">
 <img src="https://github.com/arjeta-rushiti/data-science-portfolio/blob/main/pancreatic_cancer_urinary_biomarkers/results.png" width=70% height=70%>
